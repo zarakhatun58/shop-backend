@@ -30,7 +30,7 @@ exports.signup = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword, shops });
+    const user = new ShopUser({ username, password: hashedPassword, shops });
     await user.save();
     res.status(201).json({ message: 'Signup successful' });
   } catch (err) {
@@ -41,7 +41,7 @@ exports.signup = async (req, res) => {
 exports.signin = async (req, res) => {
   const { username, password, remember } = req.body;
 
-  const user = await User.findOne({ username });
+  const user = await ShopUser.findOne({ username });
   if (!user) return res.status(404).json({ message: 'User not found' });
 
   const isMatch = await bcrypt.compare(password, user.password);
@@ -63,7 +63,7 @@ exports.signin = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('username shops');
+    const user = await ShopUser.findById(req.userId).select('username shops');
     res.json(user);
   } catch (err) {
     res.status(401).json({ message: 'Unauthorized' });
