@@ -1,4 +1,5 @@
-const User = require('../models/User');
+
+const ShopUser = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -8,7 +9,7 @@ const validatePassword = (password) => {
 
 // Check for global shop name uniqueness
 const isShopNameUnique = async (shops) => {
-  const allUsers = await User.find();
+  const allUsers = await ShopUser.find();
   const usedShopNames = allUsers.flatMap(user => user.shops);
   return shops.every(name => !usedShopNames.includes(name));
 };
