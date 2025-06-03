@@ -8,17 +8,39 @@ const authRoutes = require('./src/routes/authRoutes');
 
 const app = express();
 
-// app.use(cors({
-//   origin: ['http://localhost:5173', /\.localhost:5173$/],
-//   credentials: true,
-// }));
+// for local
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://gleeful-kelpie-ac84f5.netlify.app/',
-  ],
+  origin: (origin, callback) => {
+    if (
+      !origin ||
+      origin === 'http://localhost:5173' ||
+      /\.localhost:5173$/.test(origin)
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
+
+// for production
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if (
+//       !origin ||
+//       origin === 'http://localhost:5173' ||
+//       /\.localhost:5173$/.test(origin) ||
+//       origin.endsWith('.netlify.app')
+//     ) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+// }));
+
 
 app.use(express.json());
 app.use(cookieParser());
