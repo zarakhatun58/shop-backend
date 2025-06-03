@@ -71,6 +71,7 @@ exports.getProfile = async (req, res) => {
   }
 };
 
+
 exports.logout = async (_req, res) => {
   res.clearCookie('token', { domain: '.localhost', httpOnly: true, sameSite: 'lax' });
   res.json({ message: 'Logged out' });

@@ -15,7 +15,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://gleeful-kelpie-ac84f5.netlify.app/', // Replace with actual frontend URL
+    'https://gleeful-kelpie-ac84f5.netlify.app/',
   ],
   credentials: true,
 }));

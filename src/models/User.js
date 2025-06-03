@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   shops:{
     type:[String],
     validate:[arr=>arr.length >= 3, 'At least shops required']
-  }
+  },
+   
 });
 
 module.exports = mongoose.model('ShopUser', userSchema, 'shopUser');
