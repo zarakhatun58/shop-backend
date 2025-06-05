@@ -33,7 +33,7 @@ const app = express();
 // for production
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://velvety-maamoul-ca467f.netlify.app'
+  'https://shop-app-ca467f.netlify.app/'
 ];
 
 app.use(cors({
