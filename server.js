@@ -31,13 +31,16 @@ const app = express();
 
 
 // for production
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://velvety-maamoul-ca467f.netlify.app'
+];
+
 app.use(cors({
   origin: (origin, callback) => {
     if (
-      !origin || // allow non-browser requests
-      origin === 'http://localhost:5173' ||
-      /\.localhost:5173$/.test(origin) ||
-      /^https:\/\/[a-z0-9-]+\.netlify\.app$/.test(origin)
+      !origin || // allow non-browser tools like Postman
+      allowedOrigins.includes(origin)
     ) {
       callback(null, true);
     } else {
@@ -47,6 +50,7 @@ app.use(cors({
   },
   credentials: true,
 }));
+
 
 
 
